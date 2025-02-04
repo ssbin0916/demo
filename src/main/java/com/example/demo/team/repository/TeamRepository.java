@@ -27,23 +27,43 @@ public interface TeamRepository {
             """)
     Team findByName(String name);
 
+//    @Select("""
+//            select
+//            u.*
+//            from team t
+//            join user_team ut on t.id = ut.team_id
+//            join user u on ut.user_id = u.id
+//            where t.name = #{name}
+//            """)
+//    List<User> findUserByTeamName(String name);
+
+//    @Select("""
+//            select
+//            t.*
+//            from team t
+//            join user_team ut on t.id = ut.team_id
+//            join user u on ut.user_id = u.id
+//            where u.name = #{name}
+//            """)
+//    List<Team> findTeamsByUsername(String name);
+
     @Select("""
-            select
-            u.*
-            from team t
-            join user_team ut on t.id = ut.team_id
-            join user u on ut.user_id = u.id
-            where t.name = #{name}
-            """)
+    select * from user u
+    where exists (
+        select 1 from user_team ut
+        join team t on ut.team_id = t.id
+        where ut.user_id = u.id and t.name = #{name}
+    )
+""")
     List<User> findUserByTeamName(String name);
 
     @Select("""
-            select
-            t.*
-            from team t
-            join user_team ut on t.id = ut.team_id
-            join user u on ut.user_id = u.id
-            where u.name = #{name}
-            """)
+    select * from team t
+    where exists (
+        select 1 from user_team ut 
+        join user u on ut.user_id = u.id 
+        where ut.team_id = t.id and u.name = #{name}
+    )
+""")
     List<Team> findTeamsByUsername(String name);
 }
