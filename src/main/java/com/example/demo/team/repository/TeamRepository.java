@@ -30,7 +30,7 @@ public interface TeamRepository {
 
     @Select("""
             select
-            t.name,
+            u.id,
             u.name,
             u.dept,
             u.reg_dtm

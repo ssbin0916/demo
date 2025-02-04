@@ -17,8 +17,15 @@ public class TeamResponse {
     private List<UserDto> users;
 
     public static TeamResponse from(Team team, List<User> users) {
+//        List<UserDto> userDtoList = users.stream()
+//                .map(user -> new UserDto(user.getName(), user.getDept(), user.getRegDtm()))
+//                .collect(Collectors.toList());
+
         List<UserDto> userDtoList = users.stream()
-                .map(user -> new UserDto(user.getName(), user.getDept(), user.getRegDtm()))
+                .map(user -> {
+                    System.out.println("Username: " + user.getName());
+                    return new UserDto(user.getName(), user.getDept(), user.getRegDtm());
+                })
                 .collect(Collectors.toList());
 
         return TeamResponse.builder()

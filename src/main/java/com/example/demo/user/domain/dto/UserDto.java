@@ -12,4 +12,6 @@ public class UserDto {
     private String name;
     private String dept;
     private LocalDateTime regDtm;
+
+
 }
