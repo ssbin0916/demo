@@ -30,5 +30,4 @@ public class TeamController {
     public ResponseEntity<TeamResponse> findTeam(@PathVariable String name) {
         return ResponseEntity.ok(teamService.getTeamByName(name));
     }
-
 }

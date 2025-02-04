@@ -35,9 +35,6 @@ public class TeamService {
     public TeamResponse getTeamByName(String name) {
         Team team = teamRepository.findByName(name);
         List<User> user = teamRepository.findUserByTeamName(name);
-        for (User user1 : user) {
-            System.out.println("user1 = " + user1.getName());
-        }
         return TeamResponse.from(team, user);
     }
 }

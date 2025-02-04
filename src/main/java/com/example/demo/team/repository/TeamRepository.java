@@ -2,7 +2,6 @@ package com.example.demo.team.repository;
 
 import com.example.demo.team.domain.Team;
 import com.example.demo.team.domain.request.SaveTeamRequest;
-import com.example.demo.team.domain.response.TeamResponse;
 import com.example.demo.user.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,10 +29,7 @@ public interface TeamRepository {
 
     @Select("""
             select
-            u.id,
-            u.name,
-            u.dept,
-            u.reg_dtm
+            u.*
             from team t
             join user_team ut on t.id = ut.team_id
             join user u on ut.user_id = u.id
@@ -41,15 +37,13 @@ public interface TeamRepository {
             """)
     List<User> findUserByTeamName(String name);
 
-//    @Select("""
-//            select t.name,
-//            u.name,
-//            u.dept,
-//            u.reg_dtm
-//            from team t
-//            join user_team ut on t.id = ut.team_id
-//            join user u on ut.user_id = u.id
-//            where t.name = #{name}
-//            """)
-//    TeamResponse findTeamByName(String name);
+    @Select("""
+            select
+            t.*
+            from team t
+            join user_team ut on t.id = ut.team_id
+            join user u on ut.user_id = u.id
+            where u.name = #{name}
+            """)
+    List<Team> findTeamsByUsername(String name);
 }

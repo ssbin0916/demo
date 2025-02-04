@@ -5,8 +5,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
-
 @Mapper
 public interface UserRepository {
 
@@ -16,7 +14,7 @@ public interface UserRepository {
     void save(User user);
 
     @Select("""
-            select * from user where id = #{id}
+            select * from user where name = #{name}
             """)
-    List<User> findById(String id);
+    User findByName(String name);
 }
