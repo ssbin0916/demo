@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:log4jdbc:mysql://localhost:3306/demo
+    username: root
+    password: root
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 9999
+
+# log4jdbc, Mybatis Console Log
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari: INFO
+    javax:
+      sql:
+        DataSource: OFF
+    jdbc:
+      audit: OFF
+      resultset: OFF
+      resultsettable: INFO  #SQL \uACB0\uACFC \uB370\uC774\uD130 Table\uC744 \uB85C\uADF8\uB85C \uB0A8\uAE34\uB2E4.
+      sqlonly: OFF     #SQL\uB9CC \uB85C\uADF8\uB85C \uB0A8\uAE34\uB2E4.
+      sqltiming: INFO    #SQL\uACFC \uC18C\uC694\uC2DC\uAC04\uC744 \uD45C\uAE30\uD55C\uB2E4.
+      connection : OFF  # \uCEE4\uB125\uC158 \uD655\uC778\uAC00\uB2A5
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
